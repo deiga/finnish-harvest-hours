@@ -95,6 +95,7 @@ initialModel =
         { ignore = []
         , kiky = []
         }
+    , hoursInWorkDay = 7.5
     , previousBalanceString = ""
     , previousBalance = 0
     , mdl = Material.model

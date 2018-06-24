@@ -17,6 +17,7 @@ type alias Model =
     , user : User
     , holidays : List Holiday
     , specialTasks : SpecialTasks
+    , hoursInWorkDay : Float
     , previousBalanceString : String
     , previousBalance : Float
     , mdl : Material.Model

@@ -11,9 +11,6 @@ import Date.Extra.TimeUnit as TimeUnit
 import Model exposing (..)
 
 
-hoursInWorkDay : number
-hoursInWorkDay = 8
-
 calculateHourBalance : Model -> Hours {}
 calculateHourBalance model =
     let
@@ -131,12 +128,12 @@ totalHoursForMonth model =
         dayList =
             workDays (toFirstOfMonth model.currentDate) endDate model.holidays []
     in
-        toFloat (List.length dayList) * hoursInWorkDay
+        toFloat (List.length dayList) * model.hoursInWorkDay
 
 
 totalHoursForYear : Model -> Float
 totalHoursForYear model =
-    toFloat (List.length (totalDaysForYear model)) * hoursInWorkDay
+    toFloat (List.length (totalDaysForYear model)) * model.hoursInWorkDay
 
 
 totalDaysForYear : Model -> List Date
