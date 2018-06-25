@@ -2,6 +2,7 @@ const _ = require('lodash');
 const Promise = this.Promise || require('promise');
 const agent = require('superagent-promise')(require('superagent'), Promise);
 const holidays = require('finnish-holidays-js');
+const feiertage = require('feiertagejs');
 const Session = require('./schema/session')
 const consts = require('./consts')
 
@@ -85,6 +86,13 @@ const finnishHolidays = () =>
             name: h.description
         }))
 
+const berlinHolidays = () =>
+    _.flatMap(yearRange(), year => feiertage.getHolidays(year, 'BB'))
+        .map(h => ({
+          date: h.date,
+          name: h.trans()
+        }))
+
 function get(req, res, url, fetchFunction) {
     return agent.get(consts.harvestUrl + url)
         .type('json')
@@ -148,5 +156,6 @@ function fetchHourEntries(req, res) {
 
 module.exports = {
     fetchHourEntries: fetchHourEntries,
-    finnishHolidays: finnishHolidays
+    finnishHolidays: finnishHolidays,
+    berlinHolidays: berlinHolidays,
 };

@@ -536,6 +536,10 @@ extsprintf@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
 
+feiertagejs@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/feiertagejs/-/feiertagejs-1.2.2.tgz#e74f6c35cf6a9db8cd753fff94970099a6b4124c"
+
 filename-regex@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/filename-regex/-/filename-regex-2.0.0.tgz#996e3e80479b98b9897f15a8a58b3d084e926775"

@@ -126,7 +126,8 @@ app.get('/user', function (req, res) {
 });
 
 app.get('/holidays', function (req, res) {
-    res.send(api.finnishHolidays())
+    res.send(api.berlinHolidays())
+    // res.send(api.finnishHolidays())
 });
 
 app.get('/entries', function (req, res) {
