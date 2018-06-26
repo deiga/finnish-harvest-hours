@@ -6,6 +6,7 @@ import Update exposing (Msg, update)
 import View exposing (view)
 import Html
 import Date exposing (..)
+import Translation.Utils exposing (..)
 
 
 main : Program Never Model Msg
@@ -51,4 +52,5 @@ initialModel =
     , previousBalanceString = ""
     , previousBalance = 0
     , mdl = Material.model
+    ,currentLanguage = English
     }

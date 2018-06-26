@@ -15,7 +15,7 @@ import String
 import Model exposing (..)
 import Update exposing (..)
 import Formatting exposing (floatToHoursAndMins)
-
+import Translation.Utils exposing (..)
 
 view : Model -> Html Msg
 view model =
@@ -38,7 +38,7 @@ view model =
                         , Options.cs "calendar-button"
                         ]
                         [ i [ class "fa settings fa-calendar" ] [] ]
-                    , text (String.join " " [ "Tuntisaldo:", (floatToHoursAndMins model.totalHours) ])
+                    , text (String.join " " [ translate model.currentLanguage FlexBalance, (floatToHoursAndMins model.totalHours) ])
                     ]
                 , div [ class "kiky" ]
                     [ text (String.join " " [ "Kikytunnit:", (floatToHoursAndMins model.kikyHours) ]) ]
@@ -60,7 +60,7 @@ roundHours decimals hours =
 dialog : Model -> Html Msg
 dialog model =
     Dialog.view []
-        [ Dialog.title [] [ h3 [] [ text "Aseta vanha saldo" ] ]
+        [ Dialog.title [] [ h3 [] [ text <| translate model.currentLanguage InputPreviousBalance ] ]
         , Dialog.content []
             [ input
                 [ class "balance-input"
@@ -77,7 +77,7 @@ dialog model =
                 [ Dialog.closeOn "click"
                 , Options.cs "close-button"
                 ]
-                [ text "Sulje" ]
+                [ text <| translate model.currentLanguage CloseButton ]
             ]
         ]
 
@@ -96,7 +96,7 @@ navigationPane model =
         , div [ class "monthly-balance float-left" ]
             [ text
                 (String.join " "
-                    [ "Kuukauden tuntisaldo: "
+                    [ translate model.currentLanguage MonthFlexBalance
                     , floatToHoursAndMins model.hourBalanceOfCurrentMonth
                     ]
                 )

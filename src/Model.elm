@@ -3,6 +3,7 @@ module Model exposing (..)
 import Material
 import Date exposing (Date, Month)
 import Http
+import Translation.Utils exposing (Language)
 
 
 type alias Model =
@@ -21,6 +22,7 @@ type alias Model =
     , previousBalanceString : String
     , previousBalance : Float
     , mdl : Material.Model
+    , currentLanguage : Language
     }
 
 
