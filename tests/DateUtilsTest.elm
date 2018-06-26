@@ -8,6 +8,7 @@ import Material
 import Model exposing (..)
 import DateUtils exposing (..)
 import Date.Extra.Core exposing (toFirstOfMonth, lastOfPrevMonthDate)
+import Translation.Utils
 
 
 all : Test
@@ -99,4 +100,5 @@ initialModel =
     , previousBalanceString = ""
     , previousBalance = 0
     , mdl = Material.model
+    , currentLanguage = Translation.Utils.English
     }

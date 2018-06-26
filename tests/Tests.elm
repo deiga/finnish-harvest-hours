@@ -6,6 +6,7 @@ import Fuzz exposing (list, int, tuple, string)
 import String
 import FormattingTest
 import DateUtilsTest
+import Translation.Test
 
 
 all : Test
@@ -15,5 +16,6 @@ all =
         [ describe "Unit tests"
             [ FormattingTest.all
             , DateUtilsTest.all
+            , Translation.Test.all
             ]
         ]
