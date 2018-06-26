@@ -26,7 +26,8 @@ view model =
 
         Ok _ ->
             div [ class "main" ]
-                [ div []
+                [ viewLanguageSwitcher model
+                , div []
                     [ dialog model ]
                 , div [ class "header" ]
                     [ span [ class "name" ]
@@ -40,11 +41,44 @@ view model =
                         [ i [ class "fa settings fa-calendar" ] [] ]
                     , text (String.join " " [ translate model.currentLanguage FlexBalance, (floatToHoursAndMins model.totalHours) ])
                     ]
-                , div [ class "kiky" ]
-                    [ text (String.join " " [ "Kikytunnit:", (floatToHoursAndMins model.kikyHours) ]) ]
+                , if model.currentLanguage == Finnish then
+                    div [ class "kiky" ]
+                      [ text (String.join " " [ "Kikytunnit:", (floatToHoursAndMins model.kikyHours) ]) ]
+                  else
+                    text ""
                 , navigationPane model
                 , calendarTable model
                 ]
+
+viewLanguageSwitcher : Model -> Html Msg
+viewLanguageSwitcher model =
+  let
+    -- Check if a language is the current language
+    isCurrent lang =
+      model.currentLanguage == lang
+
+    button_ lang name =
+      button
+        [ disabled (isCurrent lang)
+        , onClick <| SetLanguage lang
+        ]
+        [ text name ]
+
+  in
+    div
+      [ languageSwitcherStyle ]
+      [ button_ English "English"
+      , button_ Finnish "Finnish"
+      ]
+
+languageSwitcherStyle : Attribute msg
+languageSwitcherStyle =
+  style
+    [
+      ("position", "fixed")
+      , ("top", "1vh")
+      , ("right", "1vw")
+    ]
 
 
 roundHours : Int -> Maybe Float -> String

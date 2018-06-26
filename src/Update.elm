@@ -6,12 +6,14 @@ import List exposing (isEmpty)
 import Task exposing (Task)
 import Http exposing (Response)
 import Navigation exposing (load)
-import Model exposing (..)
-import Api exposing (getEntries)
-import DateUtils exposing (calculateHourBalance, hourBalanceOfCurrentMonth)
 import Date.Extra.Duration as Duration
 import Date exposing (fromTime)
 import Time
+
+import Model exposing (..)
+import Api exposing (getEntries)
+import DateUtils exposing (calculateHourBalance, hourBalanceOfCurrentMonth)
+import Translation.Utils exposing (Language)
 
 
 type Msg
@@ -31,6 +33,7 @@ type Msg
     | PreviousBalanceSaved (Result Http.Error String)
     | NavigateTo String
     | Mdl (Material.Msg Msg)
+    | SetLanguage Language
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -128,13 +131,16 @@ update action model =
                 log =
                     (Debug.log "Error saving balance:" err)
             in
-                ( model, Cmd.none )
+                noFx model
 
         NavigateTo url ->
             ( model, Navigation.load url )
 
         Mdl action_ ->
             Material.update Mdl action_ model
+
+        SetLanguage lang ->
+          noFx { model | currentLanguage = lang }
 
 
 updatePreviousBalance : Model -> String -> ( Model, Cmd Msg )
