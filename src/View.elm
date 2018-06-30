@@ -191,7 +191,7 @@ hourString hours =
 
 dayCellClass : Model -> DateEntries -> String
 dayCellClass model dateEntries =
-    if not (isWorkDay dateEntries.date model.holidays) then
+    if not (isWorkDay dateEntries.date (getUserHolidays model.user.currentCity model.holidays)) then
         "day-off"
     else if dayHasOnlySpecialTasks dateEntries model.specialTasks then
         "special-day"

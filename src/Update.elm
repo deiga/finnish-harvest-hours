@@ -22,7 +22,7 @@ type Msg
     | GetDayEntries
     | EntryList (Result Http.Error (List DateEntries))
     | FetchedUser (Result Http.Error User)
-    | FetchedHolidays (Result Http.Error (List Holiday))
+    | FetchedHolidays (Result Http.Error Holidays)
     | UpdateHours
     | PreviousMonth
     | NextMonth

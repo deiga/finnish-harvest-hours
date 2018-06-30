@@ -44,13 +44,42 @@ decodeEntry =
         (field "taskId" int)
 
 
-getNationalHolidays : Request (List Holiday)
+getNationalHolidays : Request (List ( City, List Holiday ))
 getNationalHolidays =
     Http.get "/holidays" decodeHolidays
 
 
-decodeHolidays : Json.Decoder (List Holiday)
+decodeHolidays : Json.Decoder (List ( City, List Holiday ))
 decodeHolidays =
+    list
+        (map2 (,)
+            (field "city" cityDecoder)
+            (field "holidays" decodeHolidayList)
+        )
+
+
+cityDecoder : Json.Decoder City
+cityDecoder =
+    string
+        |> andThen
+            (\str ->
+                case str of
+                    "Helsinki" ->
+                        succeed Helsinki
+
+                    "Berlin" ->
+                        succeed Berlin
+
+                    "Lund" ->
+                        succeed Lund
+
+                    somethingElse ->
+                        fail <| "Unknown city: " ++ somethingElse
+            )
+
+
+decodeHolidayList : Json.Decoder (List Holiday)
+decodeHolidayList =
     list
         (map2 Holiday
             (field "date" date)
@@ -95,7 +124,7 @@ setPreviousBalance balance =
 
 httpPost : String -> Body -> Request String
 httpPost url body =
-    (Http.request
+    Http.request
         { method = "POST"
         , headers = []
         , url = url
@@ -104,4 +133,3 @@ httpPost url body =
         , timeout = Nothing
         , withCredentials = False
         }
-    )

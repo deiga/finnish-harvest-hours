@@ -127,7 +127,7 @@ totalHoursForMonth model =
                 lastOfMonthDate model.currentDate
 
         dayList =
-            workDays (toFirstOfMonth model.currentDate) endDate model.holidays []
+            workDays (toFirstOfMonth model.currentDate) endDate (getUserHolidays model.user.currentCity model.holidays) []
     in
         toFloat (List.length dayList) * model.hoursInWorkDay
 
@@ -141,7 +141,7 @@ totalDaysForYear : Model -> List Date
 totalDaysForYear model =
     model.entries
         |> List.head
-        |> Maybe.map (\entry -> workDays entry.date model.today model.holidays [])
+        |> Maybe.map (\entry -> workDays entry.date model.today (getUserHolidays model.user.currentCity model.holidays) [])
         |> Maybe.withDefault []
 
 
