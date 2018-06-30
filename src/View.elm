@@ -27,28 +27,38 @@ view model =
         Ok _ ->
             div [ class "main" ]
                 [ viewLanguageSwitcher model
-                , div []
-                    [ dialog model ]
-                , div [ class "header" ]
-                    [ span [ class "name" ]
-                        [ text (String.join " " [ model.user.firstName, model.user.lastName ]) ]
-                    , Button.render Mdl
-                        [ 1 ]
-                        model.mdl
-                        [ Dialog.openOn "click"
-                        , Options.cs "calendar-button"
-                        ]
-                        [ i [ class "fa settings fa-calendar" ] [] ]
-                    , text (String.join " " [ translate model.currentLanguage FlexBalance, (floatToHoursAndMins model.totalHours) ])
-                    ]
-                , if model.currentLanguage == Finnish then
-                    div [ class "kiky" ]
-                      [ text (String.join " " [ "Kikytunnit:", (floatToHoursAndMins model.kikyHours) ]) ]
-                  else
-                    text ""
+                , userSettingsDialog model
+                , balanceHeader model
+                , displayKiKyHours model
                 , navigationPane model
                 , calendarTable model
                 ]
+
+
+displayKiKyHours : Model -> Html Msg
+displayKiKyHours model =
+    if model.currentLanguage == Finnish then
+        div [ class "kiky" ]
+            [ text (String.join " " [ "Kikytunnit:", floatToHoursAndMins model.kikyHours ]) ]
+    else
+        text ""
+
+
+balanceHeader : Model -> Html Msg
+balanceHeader model =
+    div [ class "header" ]
+        [ span [ class "name" ]
+            [ text (getFullName model.user) ]
+        , Button.render Mdl
+            [ 1 ]
+            model.mdl
+            [ Dialog.openOn "click"
+            , Options.cs "calendar-button"
+            ]
+            [ i [ class "fa settings fa-cog" ] [] ]
+        , text (String.join " " [ translate model.currentLanguage FlexBalance, floatToHoursAndMins model.totalHours ])
+        ]
+
 
 viewLanguageSwitcher : Model -> Html Msg
 viewLanguageSwitcher model =
@@ -83,8 +93,8 @@ languageSwitcherStyle =
 
 
 
-dialog : Model -> Html Msg
-dialog model =
+userSettingsDialog : Model -> Html Msg
+userSettingsDialog model =
     Dialog.view []
         [ Dialog.title [] [ h3 [] [ text <| translate model.currentLanguage InputPreviousBalance ] ]
         , Dialog.content []
