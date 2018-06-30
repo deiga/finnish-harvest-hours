@@ -13,7 +13,6 @@ import List
 import Material.Button as Button
 import Material.Dialog as Dialog
 import Material.Options as Options
-import Round
 import String
 import Translation.Utils exposing (..)
 import Update exposing (..)
@@ -64,35 +63,32 @@ balanceHeader model =
 
 viewLanguageSwitcher : Model -> Html Msg
 viewLanguageSwitcher model =
-  let
-    -- Check if a language is the current language
-    isCurrent lang =
-      model.currentLanguage == lang
+    let
+        -- Check if a language is the current language
+        isCurrent lang =
+            model.currentLanguage == lang
 
-    button_ lang name =
-      button
-        [ disabled (isCurrent lang)
-        , onClick <| SetLanguage lang
-        ]
-        [ text name ]
-
-  in
+        button_ lang name =
+            button
+                [ disabled (isCurrent lang)
+                , onClick <| SetLanguage lang
+                ]
+                [ text name ]
+    in
     div
-      [ languageSwitcherStyle ]
-      [ button_ English "English"
-      , button_ Finnish "Finnish"
-      ]
+        [ languageSwitcherStyle ]
+        [ button_ English "English"
+        , button_ Finnish "Finnish"
+        ]
+
 
 languageSwitcherStyle : Attribute msg
 languageSwitcherStyle =
-  style
-    [
-      ("position", "fixed")
-      , ("top", "1vh")
-      , ("right", "1vw")
-    ]
-
-
+    style
+        [ ( "position", "fixed" )
+        , ( "top", "1vh" )
+        , ( "right", "1vw" )
+        ]
 
 
 userSettingsDialog : Model -> Html Msg
