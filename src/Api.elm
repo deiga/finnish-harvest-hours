@@ -13,15 +13,6 @@ getUser =
     Http.get "/user" decodeUser
 
 
-decodeUser : Json.Decoder User
-decodeUser =
-    map4 User
-        (field "firstName" string)
-        (field "lastName" string)
-        (field "previousBalance" float)
-        (field "currentCity" cityDecoder)
-
-
 getEntries : Request (List DateEntries)
 getEntries =
     Http.get "/entries" decodeDayEntries
@@ -52,30 +43,9 @@ decodeHolidays : Json.Decoder (List ( City, List Holiday ))
 decodeHolidays =
     list
         (map2 (,)
-            (field "city" cityDecoder)
+            (field "city" decodeCity)
             (field "holidays" decodeHolidayList)
         )
-
-
-cityDecoder : Json.Decoder City
-cityDecoder =
-    string
-        |> andThen
-            (\str ->
-                case str of
-                    "Helsinki" ->
-                        succeed Helsinki
-
-                    "Berlin" ->
-                        succeed Berlin
-
-                    "Lund" ->
-                        succeed Lund
-
-                    somethingElse ->
-                        fail <| "Unknown city: " ++ somethingElse
-            )
-
 
 decodeHolidayList : Json.Decoder (List Holiday)
 decodeHolidayList =
