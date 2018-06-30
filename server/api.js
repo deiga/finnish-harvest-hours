@@ -87,7 +87,7 @@ const finnishHolidays = () =>
         }))
 
 const berlinHolidays = () =>
-    _.flatMap(yearRange(), year => feiertage.getHolidays(year, 'BB'))
+    _.flatMap(yearRange(), year => feiertage.getHolidays(year, 'BE'))
         .map(h => ({
           date: h.date,
           name: h.trans()
