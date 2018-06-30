@@ -4,7 +4,7 @@ import Data.User exposing (..)
 import Date exposing (Date, Month)
 import Http
 import Material
-import Translation.Utils exposing (Language)
+import Translation.Utils exposing (..)
 
 
 type alias Model =
@@ -88,3 +88,27 @@ type alias Hours a =
 
 type alias DateHours =
     Hours { date : Date }
+
+
+initialModel : Model
+initialModel =
+    { httpError = Ok ()
+    , loading = True
+    , today = Date.fromTime 0
+    , currentDate = Date.fromTime 0
+    , entries = []
+    , totalHours = Nothing
+    , kikyHours = Nothing
+    , hourBalanceOfCurrentMonth = Nothing
+    , user = { firstName = "", lastName = "", previousBalance = 0, currentCity = Berlin }
+    , holidays = []
+    , specialTasks =
+        { ignore = []
+        , kiky = []
+        }
+    , hoursInWorkDay = 8
+    , previousBalanceString = ""
+    , previousBalance = 0
+    , mdl = Material.model
+    , currentLanguage = English
+    }

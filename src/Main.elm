@@ -5,7 +5,6 @@ import Data.User exposing (..)
 import Date exposing (..)
 import Html
 import Material
-import Translation.Utils exposing (..)
 import Update exposing (Msg, update)
 import View exposing (view)
 
@@ -31,27 +30,3 @@ init =
         , Update.getSpecialTasks
         ]
     )
-
-
-initialModel : Model
-initialModel =
-    { httpError = Ok ()
-    , loading = True
-    , today = Date.fromTime 0
-    , currentDate = Date.fromTime 0
-    , entries = []
-    , totalHours = Nothing
-    , kikyHours = Nothing
-    , hourBalanceOfCurrentMonth = Nothing
-    , user = { firstName = "", lastName = "", previousBalance = 0, currentCity = Berlin }
-    , holidays = []
-    , specialTasks =
-        { ignore = []
-        , kiky = []
-        }
-    , hoursInWorkDay = 8
-    , previousBalanceString = ""
-    , previousBalance = 0
-    , mdl = Material.model
-    , currentLanguage = English
-    }
