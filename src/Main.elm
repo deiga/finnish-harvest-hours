@@ -43,7 +43,7 @@ initialModel =
     , totalHours = Nothing
     , kikyHours = Nothing
     , hourBalanceOfCurrentMonth = Nothing
-    , user = { firstName = "", lastName = "", previousBalance = 0 }
+    , user = { firstName = "", lastName = "", previousBalance = 0, currentCity = Helsinki }
     , holidays = []
     , specialTasks =
         { ignore = []
@@ -53,5 +53,5 @@ initialModel =
     , previousBalanceString = ""
     , previousBalance = 0
     , mdl = Material.model
-    ,currentLanguage = English
+    , currentLanguage = English
     }

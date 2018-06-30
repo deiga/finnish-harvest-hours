@@ -15,10 +15,11 @@ getUser =
 
 decodeUser : Json.Decoder User
 decodeUser =
-    map3 User
+    map4 User
         (field "firstName" string)
         (field "lastName" string)
         (field "previousBalance" float)
+        (field "currentCity" cityDecoder)
 
 
 getEntries : Request (List DateEntries)

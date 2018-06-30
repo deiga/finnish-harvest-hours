@@ -115,10 +115,16 @@ app.get('/user', function (req, res) {
                     previousBalance = doc.previousBalance;
                 }
 
+                let currentCity = 'Helsinki';
+                if (doc && doc.currentCity) {
+                    currentCity = doc.currentCity;
+                }
+
                 res.send({
                     firstName: sessionUser.firstName,
                     lastName: sessionUser.lastName,
-                    previousBalance: previousBalance
+                    previousBalance: previousBalance,
+                    currentCity: currentCity,
                 });
             }
         );
