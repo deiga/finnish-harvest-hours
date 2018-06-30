@@ -115,7 +115,7 @@ app.get('/user', function (req, res) {
                     previousBalance = doc.previousBalance;
                 }
 
-                let currentCity = 'Helsinki';
+                let currentCity = 'Berlin';
                 if (doc && doc.currentCity) {
                     currentCity = doc.currentCity;
                 }

@@ -43,7 +43,7 @@ initialModel =
     , totalHours = Nothing
     , kikyHours = Nothing
     , hourBalanceOfCurrentMonth = Nothing
-    , user = { firstName = "", lastName = "", previousBalance = 0, currentCity = Helsinki }
+    , user = { firstName = "", lastName = "", previousBalance = 0, currentCity = Berlin }
     , holidays = []
     , specialTasks =
         { ignore = []
