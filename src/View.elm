@@ -5,6 +5,8 @@ import Material.Button as Button
 import Material.Options as Options
 import Round
 import List
+import Data.Model exposing (..)
+import Data.User exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -12,7 +14,6 @@ import DateUtils exposing (..)
 import Calendar exposing (monthView)
 import Date exposing (..)
 import String
-import Model exposing (..)
 import Update exposing (..)
 import Formatting exposing (floatToHoursAndMins)
 import Translation.Utils exposing (..)

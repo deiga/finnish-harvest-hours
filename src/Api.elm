@@ -4,7 +4,8 @@ import Http exposing (Request, Body, Error, jsonBody, expectString)
 import Json.Decode as Json exposing (..)
 import Json.Encode as Encode
 import Json.Decode.Extra exposing (date)
-import Model exposing (..)
+import Data.Model exposing (..)
+import Data.User exposing (..)
 
 
 getUser : Request User

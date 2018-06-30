@@ -5,7 +5,8 @@ import Date exposing (..)
 import Date.Extra.Period as Period exposing (add, diff)
 import Date.Extra.Core exposing (..)
 import Date.Extra.Compare as Compare exposing (is, Compare2, Compare3)
-import Model exposing (..)
+
+import Data.Model exposing (..)
 import DateUtils exposing (..)
 
 

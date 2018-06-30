@@ -8,7 +8,8 @@ import Date.Extra.Compare as Compare exposing (is, Compare2, Compare3)
 import Date.Extra.Format exposing (format)
 import Date.Extra.Config.Configs as DateConfigs
 import Date.Extra.TimeUnit as TimeUnit
-import Model exposing (..)
+
+import Data.Model exposing (..)
 
 
 calculateHourBalance : Model -> Hours {}

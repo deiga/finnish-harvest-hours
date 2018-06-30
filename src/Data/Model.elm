@@ -1,9 +1,11 @@
-module Model exposing (..)
+module Data.Model exposing (..)
 
-import Material
 import Date exposing (Date, Month)
 import Http
+import Material
 import Translation.Utils exposing (Language)
+
+import Data.User exposing (..)
 
 
 type alias Model =
@@ -16,7 +18,7 @@ type alias Model =
     , kikyHours : Maybe Float
     , hourBalanceOfCurrentMonth : Maybe Float
     , user : User
-    , holidays : List Holiday
+    , holidays : Holidays
     , specialTasks : SpecialTasks
     , hoursInWorkDay : Float
     , previousBalanceString : String
@@ -25,12 +27,24 @@ type alias Model =
     , currentLanguage : Language
     }
 
+getUserHolidays : City -> Holidays -> List Holiday
+getUserHolidays currentCity holidays =
+  let
+    matchCurrentCity = \x -> (Tuple.first x) == currentCity
 
-type alias User =
-    { firstName : String
-    , lastName : String
-    , previousBalance : Float
-    }
+    currentCityMatches = List.filter matchCurrentCity holidays
+
+    firstMatch = List.head currentCityMatches
+  in
+    case firstMatch of
+      Nothing ->
+        []
+      Just match ->
+        Tuple.second match
+
+type alias Holidays =
+    List ( City, List Holiday )
+
 
 
 type alias DateEntries =

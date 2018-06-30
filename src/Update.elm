@@ -10,7 +10,8 @@ import Date.Extra.Duration as Duration
 import Date exposing (fromTime)
 import Time
 
-import Model exposing (..)
+import Data.Model exposing (..)
+import Data.User exposing (..)
 import Api exposing (getEntries)
 import DateUtils exposing (calculateHourBalance, hourBalanceOfCurrentMonth)
 import Translation.Utils exposing (Language)
