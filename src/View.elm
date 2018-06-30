@@ -81,14 +81,6 @@ languageSwitcherStyle =
     ]
 
 
-roundHours : Int -> Maybe Float -> String
-roundHours decimals hours =
-    case hours of
-        Nothing ->
-            ""
-
-        Just val ->
-            String.join " " [ Round.round decimals val, "h" ]
 
 
 dialog : Model -> Html Msg
