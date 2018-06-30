@@ -1,15 +1,14 @@
 module DateUtils exposing (..)
 
-import List exposing (head, isEmpty, reverse, drop, take)
-import Date exposing (..)
-import Date.Extra.Core exposing (..)
-import Date.Extra.Period as Period exposing (add, diff)
-import Date.Extra.Compare as Compare exposing (is, Compare2, Compare3)
-import Date.Extra.Format exposing (format)
-import Date.Extra.Config.Configs as DateConfigs
-import Date.Extra.TimeUnit as TimeUnit
-
 import Data.Model exposing (..)
+import Date exposing (..)
+import Date.Extra.Compare as Compare exposing (Compare2, Compare3, is)
+import Date.Extra.Config.Configs as DateConfigs
+import Date.Extra.Core exposing (..)
+import Date.Extra.Format exposing (format)
+import Date.Extra.Period as Period exposing (add, diff)
+import Date.Extra.TimeUnit as TimeUnit
+import List exposing (drop, head, isEmpty, reverse, take)
 
 
 calculateHourBalance : Model -> Hours {}
@@ -24,10 +23,10 @@ calculateHourBalance model =
 
         normalHourBalance =
             .normalHours totalHours
-                - (totalHoursForYear model)
+                - totalHoursForYear model
                 + model.previousBalance
     in
-        { totalHours | normalHours = normalHourBalance }
+    { totalHours | normalHours = normalHourBalance }
 
 
 hourBalanceOfCurrentMonth : Model -> Float
@@ -41,7 +40,7 @@ hourBalanceOfCurrentMonth model =
             List.map (\dateEntries -> calculateDailyHours dateEntries model)
                 currentMonthEntries
     in
-        .normalHours (sumHours dateHourList) - (totalHoursForMonth model)
+    .normalHours (sumHours dateHourList) - totalHoursForMonth model
 
 
 sumHours : List (Hours a) -> Hours {}
@@ -54,8 +53,8 @@ sumHours dateHours =
 addDailyHours : Hours a -> Hours b -> Hours {}
 addDailyHours a b =
     { normalHours =
-        (a.normalHours + b.normalHours)
-    , kikyHours = (a.kikyHours + b.kikyHours)
+        a.normalHours + b.normalHours
+    , kikyHours = a.kikyHours + b.kikyHours
     }
 
 
@@ -93,7 +92,7 @@ calculateDailyHours dateEntries model =
                 (List.map
                     (\entry ->
                         if
-                            (year (dateEntries.date) == year (model.currentDate))
+                            (year dateEntries.date == year model.currentDate)
                                 && List.any (\t -> t.id == entry.taskId) model.specialTasks.kiky
                         then
                             entry.hours
@@ -103,10 +102,10 @@ calculateDailyHours dateEntries model =
                     dateEntries.entries
                 )
     in
-        { date = dateEntries.date
-        , normalHours = normalHours
-        , kikyHours = kikyHours
-        }
+    { date = dateEntries.date
+    , normalHours = normalHours
+    , kikyHours = kikyHours
+    }
 
 
 entryHours : Entry -> SpecialTasks -> Float
@@ -129,7 +128,7 @@ totalHoursForMonth model =
         dayList =
             workDays (toFirstOfMonth model.currentDate) endDate (getUserHolidays model.user.currentCity model.holidays) []
     in
-        toFloat (List.length dayList) * model.hoursInWorkDay
+    toFloat (List.length dayList) * model.hoursInWorkDay
 
 
 totalHoursForYear : Model -> Float
@@ -160,13 +159,13 @@ workDays startDate endDate holidays days =
                 else
                     days
         in
-            workDays nextDay endDate holidays dayList
+        workDays nextDay endDate holidays dayList
 
 
 dayHasOnlySpecialTasks : DateEntries -> SpecialTasks -> Bool
 dayHasOnlySpecialTasks dateEntries specialTasks =
     List.foldl
-        (\entry bool -> (isSpecialTask entry specialTasks) && bool)
+        (\entry bool -> isSpecialTask entry specialTasks && bool)
         (not (List.isEmpty dateEntries.entries))
         dateEntries.entries
 

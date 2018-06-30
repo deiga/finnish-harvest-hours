@@ -1,5 +1,6 @@
 module Data.User exposing (..)
 
+
 type alias User =
     { firstName : String
     , lastName : String
@@ -7,7 +8,13 @@ type alias User =
     , currentCity : City
     }
 
-type City = Helsinki | Berlin | Lund
+
+type City
+    = Helsinki
+    | Berlin
+    | Lund
+
 
 getFullName : User -> String
-getFullName user = String.join " " [ user.firstName, user.lastName]
+getFullName user =
+    String.join " " [ user.firstName, user.lastName ]

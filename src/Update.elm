@@ -1,19 +1,18 @@
 module Update exposing (..)
 
-import Material
-import String
-import List exposing (isEmpty)
-import Task exposing (Task)
-import Http exposing (Response)
-import Navigation exposing (load)
-import Date.Extra.Duration as Duration
-import Date exposing (fromTime)
-import Time
-
+import Api exposing (getEntries)
 import Data.Model exposing (..)
 import Data.User exposing (..)
-import Api exposing (getEntries)
+import Date exposing (fromTime)
+import Date.Extra.Duration as Duration
 import DateUtils exposing (calculateHourBalance, hourBalanceOfCurrentMonth)
+import Http exposing (Response)
+import List exposing (isEmpty)
+import Material
+import Navigation exposing (load)
+import String
+import Task exposing (Task)
+import Time
 import Translation.Utils exposing (Language)
 
 
@@ -90,11 +89,11 @@ update action model =
                     hourBalance =
                         calculateHourBalance model
                 in
-                    update UpdateHourBalanceOfCurrentMonth
-                        { newModel
-                            | totalHours = Just (hourBalance.normalHours)
-                            , kikyHours = Just (hourBalance.kikyHours)
-                        }
+                update UpdateHourBalanceOfCurrentMonth
+                    { newModel
+                        | totalHours = Just hourBalance.normalHours
+                        , kikyHours = Just hourBalance.kikyHours
+                    }
             else
                 noFx model
 
@@ -130,9 +129,9 @@ update action model =
         PreviousBalanceSaved (Err err) ->
             let
                 log =
-                    (Debug.log "Error saving balance:" err)
+                    Debug.log "Error saving balance:" err
             in
-                noFx model
+            noFx model
 
         NavigateTo url ->
             ( model, Navigation.load url )
@@ -141,7 +140,7 @@ update action model =
             Material.update Mdl action_ model
 
         SetLanguage lang ->
-          noFx { model | currentLanguage = lang }
+            noFx { model | currentLanguage = lang }
 
 
 updatePreviousBalance : Model -> String -> ( Model, Cmd Msg )
@@ -177,12 +176,12 @@ handleError model error =
                 newModel =
                     { model | loading = False }
             in
-                case response.status.code of
-                    401 ->
-                        update (NavigateTo "/login") newModel
+            case response.status.code of
+                401 ->
+                    update (NavigateTo "/login") newModel
 
-                    _ ->
-                        noFx { newModel | httpError = Err error }
+                _ ->
+                    noFx { newModel | httpError = Err error }
 
         _ ->
             noFx { model | httpError = Err error }

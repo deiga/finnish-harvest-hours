@@ -1,14 +1,13 @@
 module Main exposing (..)
 
-import Material
-import Html
-import Date exposing (..)
-
 import Data.Model exposing (..)
 import Data.User exposing (..)
+import Date exposing (..)
+import Html
+import Material
+import Translation.Utils exposing (..)
 import Update exposing (Msg, update)
 import View exposing (view)
-import Translation.Utils exposing (..)
 
 
 main : Program Never Model Msg
@@ -17,7 +16,7 @@ main =
         { init = init
         , update = update
         , view = view
-        , subscriptions = (always Sub.none)
+        , subscriptions = always Sub.none
         }
 
 

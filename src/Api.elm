@@ -1,12 +1,11 @@
 module Api exposing (..)
 
+import Data.Model exposing (..)
+import Data.User exposing (..)
 import Http exposing (Body, Error, Request, expectString, jsonBody)
 import Json.Decode as Json exposing (..)
 import Json.Decode.Extra exposing (date)
 import Json.Encode as Encode
-
-import Data.Model exposing (..)
-import Data.User exposing (..)
 
 
 getUser : Request User

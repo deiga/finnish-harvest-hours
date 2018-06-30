@@ -1,11 +1,10 @@
 module Data.Model exposing (..)
 
+import Data.User exposing (..)
 import Date exposing (Date, Month)
 import Http
 import Material
 import Translation.Utils exposing (Language)
-
-import Data.User exposing (..)
 
 
 type alias Model =
@@ -27,24 +26,29 @@ type alias Model =
     , currentLanguage : Language
     }
 
+
 getUserHolidays : City -> Holidays -> List Holiday
 getUserHolidays currentCity holidays =
-  let
-    matchCurrentCity = \x -> (Tuple.first x) == currentCity
+    let
+        matchCurrentCity =
+            \x -> Tuple.first x == currentCity
 
-    currentCityMatches = List.filter matchCurrentCity holidays
+        currentCityMatches =
+            List.filter matchCurrentCity holidays
 
-    firstMatch = List.head currentCityMatches
-  in
+        firstMatch =
+            List.head currentCityMatches
+    in
     case firstMatch of
-      Nothing ->
-        []
-      Just match ->
-        Tuple.second match
+        Nothing ->
+            []
+
+        Just match ->
+            Tuple.second match
+
 
 type alias Holidays =
     List ( City, List Holiday )
-
 
 
 type alias DateEntries =
