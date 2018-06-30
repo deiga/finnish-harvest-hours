@@ -1,12 +1,13 @@
 module Main exposing (..)
 
 import Material
-import Update exposing (Msg, update)
-import View exposing (view)
 import Html
 import Date exposing (..)
+
 import Data.Model exposing (..)
 import Data.User exposing (..)
+import Update exposing (Msg, update)
+import View exposing (view)
 import Translation.Utils exposing (..)
 
 

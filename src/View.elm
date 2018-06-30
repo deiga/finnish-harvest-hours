@@ -1,22 +1,23 @@
 module View exposing (..)
 
-import Material.Dialog as Dialog
-import Material.Button as Button
-import Material.Options as Options
-import Round
-import List
+import Calendar exposing (monthView)
 import Data.Model exposing (..)
 import Data.User exposing (..)
+import Date exposing (..)
+import DateUtils exposing (..)
+import Formatting exposing (floatToHoursAndMins)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import DateUtils exposing (..)
-import Calendar exposing (monthView)
-import Date exposing (..)
+import List
+import Material.Button as Button
+import Material.Dialog as Dialog
+import Material.Options as Options
+import Round
 import String
-import Update exposing (..)
-import Formatting exposing (floatToHoursAndMins)
 import Translation.Utils exposing (..)
+import Update exposing (..)
+
 
 view : Model -> Html Msg
 view model =
