@@ -34,6 +34,8 @@ type Msg
     | NavigateTo String
     | Mdl (Material.Msg Msg)
     | SetLanguage Language
+    | SetCurrentCity City
+    | CurrentCitySaved (Result Http.Error String)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -142,6 +144,23 @@ update action model =
         SetLanguage lang ->
             noFx { model | currentLanguage = lang }
 
+        SetCurrentCity city ->
+            let
+                oldUser = model.user
+                newUser = { oldUser | currentCity = city }
+            in
+            ( { model | user = newUser }, setCurrentCity city )
+
+        CurrentCitySaved (Ok result) ->
+            update UpdateHours model
+
+        CurrentCitySaved (Err err) ->
+            let
+                log =
+                    Debug.log "Error saving city:" err
+            in
+            noFx model
+
 
 updatePreviousBalance : Model -> String -> ( Model, Cmd Msg )
 updatePreviousBalance model balance =
@@ -156,6 +175,11 @@ updatePreviousBalance model balance =
 setPreviousBalance : Float -> Cmd Msg
 setPreviousBalance balance =
     Http.send PreviousBalanceSaved (Api.setPreviousBalance balance)
+
+
+setCurrentCity : City -> Cmd Msg
+setCurrentCity city =
+    Http.send CurrentCitySaved (Api.setCurrentCity city)
 
 
 currentTime : Cmd Msg

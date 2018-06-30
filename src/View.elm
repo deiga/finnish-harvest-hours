@@ -64,7 +64,6 @@ balanceHeader model =
 viewLanguageSwitcher : Model -> Html Msg
 viewLanguageSwitcher model =
     let
-        -- Check if a language is the current language
         isCurrent lang =
             model.currentLanguage == lang
 
@@ -94,15 +93,18 @@ languageSwitcherStyle =
 userSettingsDialog : Model -> Html Msg
 userSettingsDialog model =
     Dialog.view []
-        [ Dialog.title [] [ h3 [] [ text <| translate model.currentLanguage InputPreviousBalance ] ]
+        [ Dialog.title [] [ h2 [] [ text <| translate model.currentLanguage UserSettings ] ]
         , Dialog.content []
-            [ input
+            [ h3 [] [ text <| translate model.currentLanguage InputPreviousBalance ]
+            , input
                 [ class "balance-input"
                 , onInput UpdatePreviousBalance
                 , onBlur (SavePreviousBalance model.previousBalance)
                 , value model.previousBalanceString
                 ]
                 []
+            , h3 [] [ text <| translate model.currentLanguage CurrentCity ]
+            , citySwitcher model
             ]
         , Dialog.actions []
             [ Button.render Mdl
@@ -113,6 +115,34 @@ userSettingsDialog model =
                 ]
                 [ text <| translate model.currentLanguage CloseButton ]
             ]
+        ]
+
+
+citySwitcher : Model -> Html Msg
+citySwitcher model =
+    let
+        isCurrent city =
+            model.user.currentCity == city
+
+        button_ city name =
+            button
+                [ disabled (isCurrent city)
+                , onClick <| SetCurrentCity city
+                ]
+                [ text name ]
+    in
+    div
+        [ citySwitcherStyle ]
+        [ button_ Helsinki "Helsinki"
+        , button_ Berlin "Berlin"
+        , button_ Lund "Lund"
+        ]
+
+
+citySwitcherStyle : Attribute msg
+citySwitcherStyle =
+    style
+        [ ( "padding-bottom", "1rem" )
         ]
 
 
