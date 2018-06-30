@@ -170,10 +170,31 @@ app.post('/balance', function (req, res) {
     res.send('OK');
 });
 
+app.post('/currentCity', function (req, res) {
+    if (req.isAuthenticated()) {
+        const sessionUser = req.session.passport.user;
+        upsertUserCity(sessionUser.harvestId, req.body.currentCity);
+    }
+    res.send('OK');
+});
+
 const upsertUser = (id, balance) => {
     User.findOneAndUpdate(
         { id: id },
         { previousBalance: balance },
+        { new: true, upsert: true },
+        (err, doc) => {
+            if (err) {
+                console.error(err);
+            }
+        }
+    );
+}
+
+const upsertUserCity = (id, city) => {
+    User.findOneAndUpdate(
+        { id: id },
+        { currentCity: city },
         { new: true, upsert: true },
         (err, doc) => {
             if (err) {

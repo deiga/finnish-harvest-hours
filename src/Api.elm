@@ -91,6 +91,17 @@ setPreviousBalance balance =
         )
 
 
+setCurrentCity : City -> Request String
+setCurrentCity city =
+    httpPost "/currentCity"
+        (jsonBody
+            (Encode.object
+                [ ( "currentCity", encodeCity city )
+                ]
+            )
+        )
+
+
 httpPost : String -> Body -> Request String
 httpPost url body =
     Http.request
