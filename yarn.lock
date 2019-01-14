@@ -1007,9 +1007,10 @@ find-up@^3.0.0:
   dependencies:
     locate-path "^3.0.0"
 
-finnish-holidays-js@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/finnish-holidays-js/-/finnish-holidays-js-1.1.0.tgz#96cecbd35963e62cd47cfea847bdf4a9ce61f4c4"
+finnish-holidays-js@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/finnish-holidays-js/-/finnish-holidays-js-1.1.1.tgz#1dba1e2e4eca12b7a0d8ba219da2d2e47a5f7b4a"
+  integrity sha512-Qc0hVjBr1nAHYA+mIkVCphb7MWEE+wcH1Mz75y7uV0zeFnmVetJ1rFihvJrUa5OdEgUP8is9qJj+xGp9/cUGrg==
 
 firstline@1.2.0:
   version "1.2.0"

@@ -30,7 +30,7 @@
     "elm-format": "^0.8.1",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
-    "finnish-holidays-js": "^1.1.0",
+    "finnish-holidays-js": "^1.1.1",
     "less": "^3.8.1",
     "lodash": "^4.17.11",
     "mongoose": "^5.3.12",
